@@ -20,9 +20,10 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build and push
+    - name: Build and push server
       uses: docker/build-push-action@v3
       with:
+        working-directory: server
         context: .
         push: true
         tags: ghcr.io/${{ github.repository }}:latest
