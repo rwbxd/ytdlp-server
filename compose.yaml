@@ -1,0 +1,7 @@
+services:
+  server:
+    container_name: ytdl-server
+    volumes:
+      - ./output:output
+    ports:
+      - 8000:8000
