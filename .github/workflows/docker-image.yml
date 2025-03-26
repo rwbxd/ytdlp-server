@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -20,9 +20,9 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build and push
+    - name: Build and push server
       uses: docker/build-push-action@v3
       with:
-        context: .
+        context: ./server
         push: true
         tags: ghcr.io/${{ github.repository }}:latest
