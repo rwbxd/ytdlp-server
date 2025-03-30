@@ -1,8 +1,9 @@
-FROM python:3.13-alpine
+FROM python:3.12-alpine
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 RUN apk -U add yt-dlp
 COPY . .
-RUN pip install "fastapi[standard]"
+RUN uv sync --frozen --no-cache
 RUN mkdir -p output
 RUN chmod +x entrypoint.sh
 

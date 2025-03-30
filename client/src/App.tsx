@@ -35,7 +35,7 @@ function App() {
             <input name="url"></input>
           </div>
           <div>
-            <select name="subfolder" disabled={!(subfolders.length >= 1)}>
+            <select name="subfolder" hidden={!(subfolders.length > 1)}>
               {subfolders.map(subfolder => { return <option key="subfolder" value={subfolder}>{subfolder}</option> })}
             </select>
             <select name="res">
