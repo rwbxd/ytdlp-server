@@ -1,0 +1,28 @@
+.youtube-header {
+    color: #FF0000;
+}
+
+.plex-header {
+    color: #e5a00d;
+}
+
+.header {
+    display: flex;
+    text-align: center;
+    font-family: 'Roboto';
+}
+
+.header {
+    color: #FF0000; 
+    background-image: linear-gradient(90deg, #FF0000 , #E6A10E 80%); 
+    background-clip: text; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
