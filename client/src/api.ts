@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8000";
+const API_URL = window.location.protocol + "//" + window.location.host;
 
 export async function listOutput(): Promise<string[]> {
   const response = await fetch(API_URL + "/list_output");

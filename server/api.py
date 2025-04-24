@@ -2,6 +2,8 @@ import subprocess
 import re
 from fastapi import FastAPI, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -37,7 +39,7 @@ def download(request: YTRequest, response: Response):
         [
             "yt-dlp",
             "-o",
-            "output" + request.subfolder + f"%(title)s-%(resolution)s.%(ext)s",
+            "../output" + request.subfolder + f"%(title)s-%(resolution)s.%(ext)s",
             "-S",
             f"ext:{request.format},res:{request.res}",
             request.url,
@@ -86,3 +88,11 @@ def list_output(path: str = ""):
             .stdout.decode(errors="replace")
             .split("\r\n")
         )
+
+
+@app.get("/")
+def index():
+    return FileResponse("../client/dist/index.html")
+
+
+app.mount("/", StaticFiles(directory="../client/dist/"), name="static")

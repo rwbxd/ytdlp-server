@@ -1,22 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import {
-  DownloadRequest,
-  getServerOptions,
-  listOutput,
-  sendDownloadRequest,
-} from "./api";
+import { DownloadRequest, getServerOptions, sendDownloadRequest } from "./api";
+import { GithubLogo } from "@phosphor-icons/react";
 
 function App() {
-  const [files, setFiles] = useState([] as string[]);
   const [subfolders, setSubfolders] = useState([] as string[]);
   const [resolutions, setResolutions] = useState([] as string[]);
   const [formats, setFormats] = useState([] as string[]);
-
-  async function getFilesInDir() {
-    const output = await listOutput();
-    setFiles(output);
-  }
 
   useEffect(function getInitialData() {
     getServerOptions().then((serverOptions) => {
@@ -44,11 +34,9 @@ function App() {
           <span className="youtube-header">Youtube</span>2
           <span className="plex-header">Plex</span>
         </h1>
-        <form onSubmit={submitDownloadRequest}>
-          <div>
-            <input name="url"></input>
-          </div>
-          <div>
+        <form onSubmit={submitDownloadRequest} className="download-form">
+          <input name="url" placeholder="https://youtu.be/jNQXAC9IVRw"></input>
+          <div className="download-options">
             <select name="subfolder" hidden={!(subfolders.length > 1)}>
               {subfolders.map((subfolder) => {
                 return (
@@ -77,18 +65,16 @@ function App() {
               })}
             </select>
           </div>
-          <div>
-            <button type="submit">Download</button>
-          </div>
+          <button type="submit" className="download-button">
+            Download
+          </button>
         </form>
-        <button onClick={getFilesInDir}>List Files</button>
-        <p>Files array is {files.length ? "not empty" : "empty"}</p>
-        <ul>
-          {files.map((fileName) => {
-            return <li key={fileName}>{fileName}</li>;
-          })}
-        </ul>
       </div>
+      <footer>
+        <a href="https://github.com/rwbxd/ytdlp-server">
+          <GithubLogo size={32} color="white" />
+        </a>
+      </footer>
     </>
   );
 }
