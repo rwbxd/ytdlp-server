@@ -23,6 +23,5 @@ jobs:
     - name: Build and push server
       uses: docker/build-push-action@v3
       with:
-        context: ./server
         push: true
         tags: ghcr.io/${{ github.repository }}:latest
